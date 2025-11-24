@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bakery</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <title>BAKERY</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"
+    />
 </head>
+<body>
+    <div class="container mt-5">
+        <h3 class="mb-4">Update Kategori Roti</h3>
 
-<body class="bg-light">
-    <div class="container mt-4">
-        <h2 class="mb-4 text-center">Sistem Informasi Bakery</h2>
-        <div class="card mb-4">
-            <div class="card-header bg-secondary text-white">
-                <h5 class="mb-0">Kategori Roti</h5>
+        <form 
+            action="{{ url_for('update_kategori', id_kategori=data.id_kategori) }}"
+            method="POST"
+            >
+            <div class="mb-3">
+                <input
+                    type="text"
+                    class="form-control"
+                    name="nama_kategori"
+                    value="{{ data.nama_kategori }}"
+                    required
+                />
             </div>
-            <div class="card-body">
-                <a href="{{ url_for('form_insert_kategori') }}" class="btn btn-primary mb-3"></a>
+
+            <div class="mb-3">
+                <label>Deskripsi</label>
+                <textarea class="form-control" name="deskripsi">
+    {{ data.deskripsi }}</textarea>
             </div>
-        </div>
+
+            <button type="submit" class="btn btn-warning text-white">Update</button>
+            <a href="{{ url_for('index') }}" class="btn btn-secondary">Kembali</a>
+        </form>
     </div>
 </body>
-
 </html>
