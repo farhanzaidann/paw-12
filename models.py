@@ -1,4 +1,5 @@
 import pymysql
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class Database:
     def __init__(self):
@@ -114,5 +115,21 @@ class User:
         sql = "SELECT * FROM users WHERE username = %s"
         user = db.fetchone(sql, (username,))
         if user and user["password"] == password:
+            return user
+        return None
+    
+class User:
+    @staticmethod
+    def create_user(username, password, role):
+        hashed = generate_password_hash(password)
+        sql = "INSERT INTO users (username, password, role) VALUES (%s, %s, %s)"
+        db.query(sql, (username, hashed, role))
+        return True
+
+    @staticmethod
+    def check_login(username, password):
+        sql = "SELECT * FROM users WHERE username = %s"
+        user = db.fetchone(sql, (username,))
+        if user and check_password_hash(user['password'], password):
             return user
         return None
